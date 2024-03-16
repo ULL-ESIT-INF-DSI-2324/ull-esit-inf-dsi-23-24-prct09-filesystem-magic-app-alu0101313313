@@ -1,0 +1,7 @@
+{
+  "entryPoints": [
+    "./src/pruebas_inquirer_lowdb/*.ts",
+    "./src/*.ts"
+  ],
+  "out": "./docs"
+}
