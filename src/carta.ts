@@ -1,9 +1,10 @@
 type Coste = [number, Color[]];
-type Texto = [string, string[]?];
+type Texto = [Accion[], string[]?];
 type Subtipo = 'Basica' | undefined;
 type FuerzaYResistencia = [number, number];
 type Rareza = 'Comun' | 'Infrecuente' | 'Rara' | 'Rara Mitica';
 type Categoria = [Tipo, Subtipo?];
+type Accion = [Coste[], string];
 
 enum Tipo {
   tierra = 'Tierra',
@@ -36,16 +37,16 @@ export abstract class Carta {
   private valor_mercado_ : number;
   
   constructor(
-    public ID: number,
-    public nombre: string,
-    public tipo: Categoria,
-    public coste: Coste,
-    public colores: Color[],
-    public rareza: Rareza,
-    public texto: Texto,
-    public FyR: FuerzaYResistencia,
-    public lealtad: number,
-    public valor_mercado: number
+    ID: number,
+    nombre: string,
+    tipo: Categoria,
+    coste: Coste,
+    colores: Color[],
+    rareza: Rareza,
+    texto: Texto,
+    FyR: FuerzaYResistencia,
+    lealtad: number,
+    valor_mercado: number
   ){
 
     this.id_ = ID;
@@ -168,10 +169,10 @@ export abstract class Carta {
   }
 
   getLealtad(): number | undefined {
-    if(this.tipo_[0] == 'Criatura'){
+    if(this.tipo_[0] == 'Planeswalker'){
       return this.lealtad_;
     } else {
-      console.log("La carta introducida no tiene fuerza ni resistencia dado a que no es una criatura");
+      console.log("La carta introducida no tiene contadores de lealtad dado a que no es un planeswalker");
       return undefined;
     }
   }
