@@ -1,108 +1,44 @@
 //import inquirer from 'inquirer'
 
-/**
- * la suma de dos numeros
- * @param num1 primer operando
- * @param num2 segundo operando
- * @returns la suma de ambos operandos
- */
- export function add(num1: number, num2: number): number {
-   return num1 + num2;
-}
+//console.log(add(1,2));
 
-console.log(add(1,2));
+import chalk from "chalk";
 
-/*
-const prompt = await inquierer.prompt([
-  {
-    type: 'input',
-    name: 'name',
-    message: 'What is the number to guess?'
-  },
-  {
-    type: 'list',
-    name: 'color',
-    message: 'Whats is your favorite color?',
-    choices: ['Red', 'Green', 'Blue']
+const log = console.log;
+
+// Combine styled and normal strings
+log(chalk.blue("Hello") + " World" + chalk.red("!"));
+
+// Compose multiple styles using the chainable API
+log(chalk.blue.bgRed.bold("Hello world!"));
+
+// Pass in multiple arguments
+log(chalk.blue("Hello", "World!", "Foo", "bar", "biz", "baz"));
+
+// Nest styles
+log(chalk.red("Hello", chalk.underline.bgBlue("world") + "!"));
+
+// Nest styles of the same type even (color, underline, background)
+log(
+  chalk.green(
+    "I am a green line " +
+      chalk.blue.underline.bold("with a blue substring") +
+      " that becomes green again!"
+  )
+);
+
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+
+yargs(hideBin(process.argv))
+  .command('add', 'Adds a card to the collection', {
+  id: {
+   description: 'Card ID',
+   type: 'number',
+   demandOption: true
   }
-]);
-
-//console.log(`Hello, ${prompt.name}!, your favorite color is ${prompt.color}`)
-
-*/
-/* 
-inquirer
-  .prompt([
-    {
-      type: 'input',
-      name: 'username',
-      message: 'What is your username?',
-    },
-    {
-      type: 'password',
-      name: 'password',
-      message: 'Enter your password:',
-    },
-    {
-      type: 'list',
-      name: 'color',
-      message: 'What is your favorite color?',
-      choices: ['Red', 'Blue', 'Green'],
-    },
-  ])
-  .then((answers) => {
-    console.log('Username:', answers.username);
-    console.log('Password:', answers.password);
-    console.log('Favorite Color:', answers.color);
-  })
-  .catch((error) => {
-    if (error.isTtyError) {
-      console.log('Prompt couldn\'t be rendered in the current environment');
-    } else {
-      console.log('Something else went wrong');
-    }
-  });
-*/
-/*
-import inquirer from 'inquirer';
-import low from 'lowdb';
-import FileSync from 'lowdb/adapters/FileSync.js';
-
-// Definir el adapter de LowDB para guardar los datos en un archivo JSON
-const adapter = new FileSync('db.json');
-const db = low(adapter);
-
-// Definir el esquema de datos
-interface UserData {
-    name: string;
-    age: number;
-}
-
-// Iniciar la interacción con el usuario
-async function getUserData(): Promise<UserData> {
-    const answers = await inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Ingrese su nombre:'
-        },
-        {
-            type: 'number',
-            name: 'age',
-            message: 'Ingrese su edad:'
-        }
-    ]);
-
-    return answers as UserData;
-}
-
-// Guardar los datos en la base de datos
-function saveUserData(userData: UserData) {  
-  db.defaults({ users: [] }).write(); // Establecer la estructura de la base de datos si no existe
-  db.get('users').push(userData).write(); // Agregar el nuevo usuario a la base de datos
-}
-
-const userData = await getUserData();
-saveUserData(userData);
-console.log('¡Datos guardados correctamente!');
-*/
+ }, (argv) => {
+  console.log(argv.id);
+ })
+ .help()
+ .argv;

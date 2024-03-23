@@ -1,3 +1,6 @@
+import chalk from "chalk";
+import { log } from "console";
+
 type Coste = [number, Color[]];
 type Texto = [Accion[], string[]?];
 type Subtipo = 'Basica' | undefined;
@@ -35,6 +38,7 @@ export abstract class Carta {
   private FyR_: FuerzaYResistencia;
   private lealtad_: number;
   private valor_mercado_ : number;
+  private cantidad_: number;
   
   constructor(
     ID: number,
@@ -46,11 +50,13 @@ export abstract class Carta {
     texto: Texto,
     FyR: FuerzaYResistencia,
     lealtad: number,
-    valor_mercado: number
+    valor_mercado: number,
+    cantidad: number
   ){
 
     this.id_ = ID;
     this.tipo_ = tipo;
+    this.cantidad_ = cantidad;
 
     switch (tipo[0]){
 
@@ -179,6 +185,22 @@ export abstract class Carta {
 
   getValorMercado():number{
     return this.valor_mercado_;
+  }
+
+  getCantidad():number{
+    return this.cantidad_;
+  }
+
+  addCantidad(): void {
+    this.cantidad_++;
+  }
+
+  quitarCantidad(): void {
+    this.cantidad_--;
+  }
+
+  mostrarCarta(): void {
+    
   }
 
 }
