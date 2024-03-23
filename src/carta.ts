@@ -27,7 +27,7 @@ enum Color {
   blue = "azul"
 }
 
-export abstract class Carta {
+export class Carta {
   private id_: number;
   private nombre_: string;
   private tipo_: Categoria;
