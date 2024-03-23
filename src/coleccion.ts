@@ -8,6 +8,10 @@ export class Coleccion {
     this.coleccion_ = new Map<number, Carta>(); 
   }
 
+  getCarta(id: number): Carta | undefined {
+    return this.coleccion_.get(id)
+  }
+
   setCarta(carta: Carta): boolean {
     if(this.coleccion_.has(carta.getID())){
       return false;
@@ -51,6 +55,12 @@ export class Coleccion {
       return true;
     }
     return false;
+  }
+
+  forEach(callback: (carta: Carta) => void): void {
+    this.coleccion_.forEach((carta) => {
+      callback(carta);
+    });
   }
 
 }

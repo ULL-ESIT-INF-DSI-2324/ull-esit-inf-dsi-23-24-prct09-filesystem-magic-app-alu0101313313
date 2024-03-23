@@ -5,20 +5,13 @@ import chalk from "chalk";
 const log = console.log;
 
 export class Coleccionista {
-  private id_: number;
   private nombre_: string;
   protected coleccionUsuario_ = new Coleccion();
 
   constructor(
-    id: number,
     nombre: string,
   ){
-    this.id_ = id;
     this.nombre_ = nombre;
-  }
-
-  getUsuarioID(): number {
-    return this.id_;
   }
 
   getUsuarioNombre(): string {
@@ -64,5 +57,25 @@ export class Coleccionista {
       log(chalk.red("No se ha encontrado la carta " + carta.getNombre() + " en la coleccion de " + this.nombre_));
     }
     return result;
+  }
+
+  showCarta(id: number): boolean {
+    const carta = this.coleccionUsuario_.getCarta(id);
+    if(carta){
+      carta.mostrarCarta();
+    } else {
+      log(chalk.red("No se ha encontrado la carta en la coleccion de " + this.nombre_));
+      return false;
+    }
+    return true;
+  }
+
+  showColeccion(): boolean {
+    log(chalk.green("Colecion de cartas MTG de " + this.nombre_));
+    this.coleccionUsuario_.forEach((carta) => {
+      log("======================================");
+      carta.mostrarCarta();
+    });
+    return true;
   }
 }

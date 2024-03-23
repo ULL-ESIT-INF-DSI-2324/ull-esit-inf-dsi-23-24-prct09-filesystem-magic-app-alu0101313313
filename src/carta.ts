@@ -1,13 +1,13 @@
 import chalk from "chalk";
 import { log } from "console";
 
-type Coste = [number, Color[]];
+type Coste = [Color[], number?];
 type Texto = [Accion[], string[]?];
 type Subtipo = 'Basica' | undefined;
 type FuerzaYResistencia = [number, number];
 type Rareza = 'Comun' | 'Infrecuente' | 'Rara' | 'Rara Mitica';
 type Categoria = [Tipo, Subtipo?];
-type Accion = [Coste[], string];
+type Accion = [string, Coste?];
 
 enum Tipo {
   tierra = 'Tierra',
@@ -199,8 +199,284 @@ export abstract class Carta {
     this.cantidad_--;
   }
 
-  mostrarCarta(): void {
+  darColor(colores: Color[]): void {
+    colores.forEach((color) => {
+      switch(color){
+        case "blanco":
+          chalk.white(color);
+          break;
+        case "negro":
+          chalk.black(color);
+          break;
+        case "azul":
+          chalk.blue(color);
+          break;
+        case "rojo":
+          chalk.red(color);
+          break;
+        case "verde":
+          chalk.green(color);
+          break;
+             
+      }
+    });
+  }
+
+  mostrarCarta() {
+
+    switch(this.tipo_[0]){
+      case 'Tierra':
+        if(this.tipo_[1] == 'Basica'){
+
+          log(chalk.green("ID: " + this.id_));
+          log(chalk.green("Nombre: " + this.nombre_));
+          log(chalk.green("Tipo: " + this.tipo_));
+          log(chalk.green("Colores: "));
+          this.darColor(this.colores_);
+          log(chalk.green("Rareza: " + this.rareza_));
+          log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+          //la parte del lore de la carta
+          log(chalk.green("Historia: " + this.texto_[1]));
+
+        } else {
+
+          log(chalk.green("ID: " + this.id_));
+          log(chalk.green("Nombre: " + this.nombre_));
+          log(chalk.green("Tipo: " + this.tipo_));
+          log(chalk.green("Colores: "));
+          this.darColor(this.colores_);
+          log(chalk.green("Rareza: " + this.rareza_));
+          log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+          log(chalk.green("Texto: "));
+          // texto de la carta
+          let acciones = this.texto_[0];
+          acciones.forEach((accion) => {
+            //todo esto para los colores
+            if(accion[1] != undefined){
+              let coste = accion[1] as Coste;
+              log(chalk.green(coste[1])); 
+              this.darColor(coste[0]);
+              //esto para el texto lol
+              log(chalk.green(accion[0]));   
+            } else {
+              //esto para el texto lol
+              log(chalk.green(accion[0]));  
+            }
+          });
+          //la parte del lore de la carta
+          log(chalk.green("Historia: " + this.texto_[1]));
+        }
+      break;
+
+      case "Conjuro":
+        log(chalk.green("ID: " + this.id_));
+        log(chalk.green("Nombre: " + this.nombre_));
+        log(chalk.green("Tipo: " + this.tipo_));
+
+        log(chalk.green("Colores: "));
+        this.darColor(this.colores_);
+        log(chalk.green("Coste: " + this.coste_[1])); 
+        this.darColor(this.coste_[0]);
+
+        log(chalk.green("Texto: "));
+        // texto de la carta
+        let accionesConjuro = this.texto_[0];
+        accionesConjuro.forEach((accion) => {
+          //todo esto para los colores
+          if(accion[1] != undefined){
+            let coste = accion[1] as Coste;
+            log(chalk.green(coste[1])); 
+            this.darColor(coste[0]);
+            //esto para el texto lol
+            log(chalk.green(accion[0]));   
+          } else {
+          //esto para el texto lol
+          log(chalk.green(accion[0]));  
+          }
+        });
+        //la parte del lore de la carta
+        log(chalk.green(this.texto_[1]));
+
+        log(chalk.green("Rareza: " + this.rareza_));
+        log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+        log(chalk.green("Cantidad: " + this.cantidad_));
+      break;
+
+      case "Instantaneo":
+        log(chalk.green("ID: " + this.id_));
+        log(chalk.green("Nombre: " + this.nombre_));
+        log(chalk.green("Tipo: " + this.tipo_));
+
+        log(chalk.green("Colores: "));
+        this.darColor(this.colores_);
+        log(chalk.green("Coste: " + this.coste_[1])); 
+        this.darColor(this.coste_[0]);
+
+        log(chalk.green("Texto: "));
+        // texto de la carta
+        let accionesInstantaneo = this.texto_[0];
+        accionesInstantaneo.forEach((accion) => {
+          //todo esto para los colores
+          if(accion[1] != undefined){
+            let coste = accion[1] as Coste;
+            log(chalk.green(coste[1])); 
+            this.darColor(coste[0]);
+            //esto para el texto lol
+            log(chalk.green(accion[0]));   
+          } else {
+          //esto para el texto lol
+          log(chalk.green(accion[0]));  
+          }
+        });
+        //la parte del lore de la carta
+        log(chalk.green(this.texto_[1]));
+
+        log(chalk.green("Rareza: " + this.rareza_));
+        log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+        log(chalk.green("Cantidad: " + this.cantidad_));
+      break;
+
+      case "Criatura":
+        log(chalk.green("ID: " + this.id_));
+        log(chalk.green("Nombre: " + this.nombre_));
+        log(chalk.green("Tipo: " + this.tipo_));
+
+        log(chalk.green("Colores: "));
+        this.darColor(this.colores_);
+        log(chalk.green("Coste: " + this.coste_[1])); 
+        this.darColor(this.coste_[0]);
+
+        log(chalk.green("Texto: "));
+        // texto de la carta
+        let accionesCriatura = this.texto_[0];
+        accionesCriatura.forEach((accion) => {
+          //todo esto para los colores
+          if(accion[1] != undefined){
+            let coste = accion[1] as Coste;
+            log(chalk.green(coste[1])); 
+            this.darColor(coste[0]);
+            //esto para el texto lol
+            log(chalk.green(accion[0]));   
+          } else {
+          //esto para el texto lol
+          log(chalk.green(accion[0]));  
+          }
+        });
+        //la parte del lore de la carta
+        log(chalk.green(this.texto_[1]));
+
+        log(chalk.green("Fuerza: " + this.FyR_[0]));
+        log(chalk.green("Resistencia: " + this.FyR_[1]));
+        log(chalk.green("Rareza: " + this.rareza_));
+        log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+        log(chalk.green("Cantidad: " + this.cantidad_));
+      break;
+
+      case "Artefacto":
+        log(chalk.green("ID: " + this.id_));
+        log(chalk.green("Nombre: " + this.nombre_));
+        log(chalk.green("Tipo: " + this.tipo_));
+
+        log(chalk.green("Colores: "));
+        this.darColor(this.colores_);
+        log(chalk.green("Coste: " + this.coste_[1])); 
+        this.darColor(this.coste_[0]);
+
+        log(chalk.green("Texto: "));
+        // texto de la carta
+        let accionesArtefacto = this.texto_[0];
+        accionesArtefacto.forEach((accion) => {
+          //todo esto para los colores
+          if(accion[1] != undefined){
+            let coste = accion[1] as Coste;
+            log(chalk.green(coste[1])); 
+            this.darColor(coste[0]);
+            //esto para el texto lol
+            log(chalk.green(accion[0]));   
+          } else {
+          //esto para el texto lol
+          log(chalk.green(accion[0]));  
+          }
+        });
+        //la parte del lore de la carta
+        log(chalk.green(this.texto_[1]));
+
+        log(chalk.green("Rareza: " + this.rareza_));
+        log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+        log(chalk.green("Cantidad: " + this.cantidad_));
+      break;
     
+      case "Encantamiento":
+        log(chalk.green("ID: " + this.id_));
+        log(chalk.green("Nombre: " + this.nombre_));
+        log(chalk.green("Tipo: " + this.tipo_));
+
+        log(chalk.green("Colores: "));
+        this.darColor(this.colores_);
+        log(chalk.green("Coste: " + this.coste_[1])); 
+        this.darColor(this.coste_[0]);
+
+        log(chalk.green("Texto: "));
+        // texto de la carta
+        let accionesEncantamiento = this.texto_[0];
+        accionesEncantamiento.forEach((accion) => {
+          //todo esto para los colores
+          if(accion[1] != undefined){
+            let coste = accion[1] as Coste;
+            log(chalk.green(coste[1])); 
+            this.darColor(coste[0]);
+            //esto para el texto lol
+            log(chalk.green(accion[0]));   
+          } else {
+          //esto para el texto lol
+          log(chalk.green(accion[0]));  
+          }
+        });
+        //la parte del lore de la carta
+        log(chalk.green(this.texto_[1]));
+
+        log(chalk.green("Rareza: " + this.rareza_));
+        log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+        log(chalk.green("Cantidad: " + this.cantidad_));
+      break;
+    
+      case "Planeswalker":
+        log(chalk.green("ID: " + this.id_));
+        log(chalk.green("Nombre: " + this.nombre_));
+        log(chalk.green("Tipo: " + this.tipo_));
+
+        log(chalk.green("Colores: "));
+        this.darColor(this.colores_);
+        log(chalk.green("Coste: " + this.coste_[1])); 
+        this.darColor(this.coste_[0]);
+
+        log(chalk.green("Texto: "));
+        // texto de la carta
+        let accionesPlaneswalker = this.texto_[0];
+        accionesPlaneswalker.forEach((accion) => {
+          //todo esto para los colores
+          if(accion[1] != undefined){
+            let coste = accion[1] as Coste;
+            log(chalk.green(coste[1])); 
+            this.darColor(coste[0]);
+            //esto para el texto lol
+            log(chalk.green(accion[0]));   
+          } else {
+          //esto para el texto lol
+          log(chalk.green(accion[0]));  
+          }
+        });
+        //la parte del lore de la carta
+        log(chalk.green(this.texto_[1]));
+
+        log(chalk.green("Lealtad: " + this.lealtad_));
+        log(chalk.green("Rareza: " + this.rareza_));
+        log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
+        log(chalk.green("Cantidad: " + this.cantidad_));
+      break;
+    
+    }    
+    return true;
   }
 
 }
