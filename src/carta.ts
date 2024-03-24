@@ -56,7 +56,7 @@ export class Carta {
 
       case 'Tierra':
         this.nombre_ = nombre;
-        this.colores_[0] = colores[0];
+        this.colores_= colores;
         this.rareza_ = rareza;
         this.valor_mercado_ = valor_mercado;  
       break;
@@ -208,7 +208,6 @@ export class Carta {
         this.darColor(this.colores_);
         log(chalk.green("Rareza: " + this.rareza_));
         log(chalk.green("Valor mercado: " + this.valor_mercado_  + "€"));
-        log(chalk.green("Historia: " + this.texto_));
       break;
 
       case "Conjuro":
