@@ -218,6 +218,4 @@ describe("Pruebas de Carta.ts", () => {
     );
     expect(carta_.mostrarCarta()).true;
   })
-
-
 });

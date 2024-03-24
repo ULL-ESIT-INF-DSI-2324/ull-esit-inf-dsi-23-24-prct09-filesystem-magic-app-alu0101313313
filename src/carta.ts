@@ -198,7 +198,7 @@ export class Carta {
 
   mostrarCarta() {
 
-    switch(this.tipo_[0]){
+    switch(this.tipo_){
 
       case 'Tierra':
         log(chalk.green("ID: " + this.id_));
