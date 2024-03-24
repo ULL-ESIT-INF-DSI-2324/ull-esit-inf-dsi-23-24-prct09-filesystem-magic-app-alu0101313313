@@ -24,9 +24,6 @@ export class Coleccionista {
       log(chalk.green("Se ha añadido la carta " + carta.getNombre() + " a la coleccion de " + this.nombre_));
     } else {
       log(chalk.red("La carta " + carta.getNombre() + "ya existe en su coleccion."));
-      result = this.coleccionUsuario_.addCartaRepetida(carta);
-      log(chalk.green("Se ha añadido una copia de " + carta.getNombre() + "en la coleccion de " + this.nombre_ +
-      ". Unidades actuales de la carta en la coleccion: " + carta.getCantidad()));
     }
     return result;
   }
@@ -41,20 +38,12 @@ export class Coleccionista {
     return result;
   }
 
-  quitarCartar(id: number, carta: Carta, repetida: boolean): boolean {
-    if(repetida){
-      const result = this.coleccionUsuario_.quitarCartaRepetida(carta);
-      if(result){
-        log(chalk.green("Se ha retirado una copia de la carta " + carta.getNombre() + " en la coleccion de " + this.nombre_));
-      } else {
-        log(chalk.red("No se ha encontrado la carta " + carta.getNombre() + " en la coleccion de " + this.nombre_));
-      }
-    }
-    const result = this.coleccionUsuario_.quitarCarta(id, carta);
+  quitarCarta(id: number): boolean {
+    const result = this.coleccionUsuario_.quitarCarta(id);
     if(result){
-      log(chalk.green("Se ha retirado la carta " + carta.getNombre() + " en la coleccion de " + this.nombre_));
+      log(chalk.green("Se ha retirado la carta en la coleccion de " + this.nombre_));
     } else {
-      log(chalk.red("No se ha encontrado la carta " + carta.getNombre() + " en la coleccion de " + this.nombre_));
+      log(chalk.red("No se ha encontrado la carta en la coleccion de " + this.nombre_));
     }
     return result;
   }

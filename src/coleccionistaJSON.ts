@@ -24,17 +24,55 @@ export class ColeccionistaJSON extends Coleccionista {
           carta.texto_,
           carta.FyR_,
           carta.lealtad_,
-          carta.valor_mercado_,
-          carta.cantidad_
+          carta.valor_mercado_
         ));
     }); 
   }
 
   setCarta(carta: Carta): boolean {
     const result = super.setCarta(carta);
+    const ruta = "./data/" + this.getUsuarioNombre() + "/" + carta.getID() + ".json";
     if(result){
-      fs.writeFile("./data/" + this.getUsuarioNombre() + "/" + carta.getID() + ".json", JSON.stringify)
+      fs.writeFile(ruta, JSON.stringify(carta), (err) => {
+        if(err){
+          console.log(err);
+        }
+      });
     }
+    return result;
+  }
+
+  quitarCarta(id: number): boolean {
+    let result;
+    const ruta = "./data/" + this.getUsuarioNombre() + "/" + id + ".json";
+    result = super.quitarCarta(id);
+    if(result){
+      fs.unlink(ruta, (err) => {
+        if(err){
+          console.log(err);
+        }
+      });
+    }
+    return result;
+  }
+
+  modCarta(carta: Carta): boolean {
+    const result = super.modCarta(carta);
+    const ruta = "./data/" + this.getUsuarioNombre() + "/" + carta.getID() + ".json";
+    if(result){
+      fs.writeFileSync(ruta, JSON.stringify(carta));
+    }
+    return result;
+  }
+
+  showCarta(id: number): boolean {
+    super.showCarta(id);
+    return true;
+  }
+
+  showColeccion(): boolean {
+    super.showColeccion();
+    return true;
   }
 
 }

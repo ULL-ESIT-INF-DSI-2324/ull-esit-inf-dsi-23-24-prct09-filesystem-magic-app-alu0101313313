@@ -30,32 +30,10 @@ export class Coleccion {
     }
   }
 
-  quitarCarta(id: number, carta: Carta): boolean {
-    if(this.coleccion_.has(carta.getID())){
-      return this.coleccion_.delete(id);
-    } else {
-      return false;
-    }
+  quitarCarta(id: number): boolean {
+    return this.coleccion_.delete(id);
   }
 
-  addCartaRepetida(carta: Carta): boolean {
-    if(this.coleccion_.has(carta.getID())){
-      carta.addCantidad();
-      return true;
-    }
-    return false;
-  }
-
-  quitarCartaRepetida(carta: Carta): boolean {
-    if(this.coleccion_.has(carta.getID())){
-      carta.quitarCantidad();
-      if(carta.getCantidad() <= 0){
-        this.quitarCarta(carta.getID(), carta);
-      }
-      return true;
-    }
-    return false;
-  }
 
   forEach(callback: (carta: Carta) => void): void {
     this.coleccion_.forEach((carta) => {

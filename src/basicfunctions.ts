@@ -2,6 +2,8 @@
 
 //console.log(add(1,2));
 
+/*
+
 import chalk from "chalk";
 
 const log = console.log;
@@ -26,6 +28,8 @@ log(
       " that becomes green again!"
   )
 );
+
+*/
 
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
