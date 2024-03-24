@@ -1,7 +1,6 @@
 import "mocha";
 import { expect } from "chai";
 import { Carta, Tipo, Coste, Color, Rareza } from "../src/carta.js";
-import { Coleccion } from "../src/coleccion.js"
 import { Coleccionista } from "../src/coleccionista.js"
 
 describe("Pruebas de la clase Coleccionista", () => {
