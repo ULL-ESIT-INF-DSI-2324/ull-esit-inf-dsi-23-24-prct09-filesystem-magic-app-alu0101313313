@@ -120,4 +120,7 @@ Hemos realizado de forma completa este ejercicio, y aqui señalamos los diferent
 
 Para este ultimo punto, he recopilado algunas de las paginas que me han sido utiles para los ejercicos de la _práctica_:
 
-1. **Aprendizaje sobre _inquirer_ y _lowdb_:** [https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml](https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml)
+1. **Enunciado de la practica:** [https://ull-esit-inf-dsi-2324.github.io/prct09-fiilesystem-magic-app/](https://ull-esit-inf-dsi-2324.github.io/prct09-fiilesystem-magic-app/)
+2. **Yargs:** [https://www.npmjs.com/package/yargs](https://www.npmjs.com/package/yargs)
+3. **Chalk:** [https://www.npmjs.com/package/chalk](https://www.npmjs.com/package/chalk)
+4. **Node.js** [https://nodejs.org/docs/latest/api/fs.html](https://nodejs.org/docs/latest/api/fs.html)
